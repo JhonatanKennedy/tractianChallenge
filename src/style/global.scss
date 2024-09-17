@@ -2,6 +2,9 @@
    v5.0.2 | 20191019
    License: none (public domain)
 */
+* {
+    font-family: 'Inter', sans-serif;
+}
 
 html,
 body,
@@ -89,7 +92,6 @@ video {
     padding: 0;
     border: 0;
     font-size: 100%;
-    font: inherit;
     vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
