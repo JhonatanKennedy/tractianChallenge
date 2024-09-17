@@ -1,0 +1,96 @@
+@import '../../style/variables';
+
+%button-body {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    border: none;
+}
+
+%button-small {
+    @extend %button-body;
+
+    padding: 4px 8px;
+    border-radius: 2px;
+    gap: 8px;
+
+    font-weight: $semi-bold;
+
+    svg {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+%button-medium {
+    @extend %button-body;
+
+    padding: 6px 16px;
+    border-radius: 3px;
+    gap: 6px;
+
+    font-weight: $medium;
+
+    svg {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+%button-primary {
+    background-color: $secondary;
+    color: $white;
+
+    svg {
+        color: $white;
+    }
+}
+
+%button-secondary {
+    background-color: $white;
+    color: $text-normal;
+    border: 1px solid $border-color;
+
+    svg {
+        color: $primary;
+    }
+}
+
+%button-selected {
+    background-color: $primary;
+    color: $white;
+
+    svg {
+        color: $white;
+    }
+}
+
+.button-primary-small {
+    @extend %button-small;
+    @extend %button-primary;
+}
+
+.button-primary-medium {
+    @extend %button-medium;
+    @extend %button-primary;
+}
+
+.button-secondary-small {
+    @extend %button-small;
+    @extend %button-secondary;
+}
+
+.button-secondary-medium {
+    @extend %button-medium;
+    @extend %button-secondary;
+}
+
+.button-selected-small {
+    @extend %button-small;
+    @extend %button-selected;
+}
+
+.button-selected-medium {
+    @extend %button-medium;
+    @extend %button-selected;
+}
