@@ -1,4 +1,4 @@
-export function Test() {
+export function Dummy() {
     return (
         <div>
             <span>teste</span>
