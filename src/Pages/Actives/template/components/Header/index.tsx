@@ -1,6 +1,6 @@
 import { Button } from '../../../../../components/Button'
 import { Icons } from '../../../../../icons'
-import './styles.scss'
+import styles from './styles.module.scss'
 
 export type CompanyType = { id: string; name: string }
 
@@ -11,17 +11,18 @@ export type HeaderProps = {
 
 export function Header({ selectedCompany, companies }: HeaderProps) {
     return (
-        <div className="container">
-            <div className="logo-area">
+        <div className={styles.container}>
+            <div className={styles['logo-area']}>
                 <Icons.Contained.Logo />
             </div>
-            <div className="button-area">
+            <div className={styles['button-area']}>
                 {companies.map((company) => (
                     <Button
                         key={company.id}
                         color="primary"
                         size="small"
                         isSelected={selectedCompany === company.id}
+                        leftIcon={<Icons.Outlined.Unit />}
                     >
                         {company.name}
                     </Button>

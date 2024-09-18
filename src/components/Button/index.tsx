@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from 'react'
-import './styles.scss'
+import styles from './styles.module.scss'
 
 type ButtonProps = DetailedHTMLProps<
     ButtonHTMLAttributes<HTMLButtonElement>,
@@ -19,8 +19,8 @@ export function Button({
     size = 'medium',
     ...rest
 }: ButtonProps) {
-    const classNotSelected = `button-${color}-${size}`
-    const classSelected = `button-selected-${size}`
+    const classNotSelected = styles[`button-${color}-${size}`]
+    const classSelected = styles[`button-selected-${size}`]
 
     const finalClass = isSelected ? classSelected : classNotSelected
 
