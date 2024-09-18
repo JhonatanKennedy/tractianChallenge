@@ -1,11 +1,10 @@
 @import '../../../style/variables';
 
 .container {
-    flex: 1;
     background-color: $background-light;
+    height: 100%;
 }
 
 .content {
     padding: 8px;
-    height: 100%;
 }
