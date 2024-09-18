@@ -1,0 +1,21 @@
+@import '../../../../../style/variables';
+
+.container {
+    flex: 1;
+    background-color: $background-dark;
+    height: 48px;
+    padding: 0px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-area {
+    height: 14px;
+    width: 103px;
+}
+
+.button-area {
+    display: flex;
+    gap: 10px;
+}
