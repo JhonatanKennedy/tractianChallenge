@@ -1,0 +1,11 @@
+@import '../../../style/variables';
+
+.container {
+    flex: 1;
+    background-color: $background-light;
+}
+
+.content {
+    padding: 8px;
+    height: 100%;
+}
