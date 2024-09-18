@@ -3,6 +3,7 @@ import { AssetsTemplate, AssetsTemplateProps } from './template'
 export function AssetsPage() {
     const props: AssetsTemplateProps = {
         headerProps: {
+            onClickCompany: (company) => console.log(company),
             companies: [
                 {
                     id: '662fd0ee639069143a8fc387',

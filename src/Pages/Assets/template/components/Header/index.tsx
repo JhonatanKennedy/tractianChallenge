@@ -7,9 +7,14 @@ export type CompanyType = { id: string; name: string }
 export type HeaderProps = {
     selectedCompany: string
     companies: CompanyType[]
+    onClickCompany: (company: CompanyType) => void
 }
 
-export function Header({ selectedCompany, companies }: HeaderProps) {
+export function Header({
+    selectedCompany,
+    companies,
+    onClickCompany,
+}: HeaderProps) {
     return (
         <div className={styles.container}>
             <div className={styles['logo-area']}>
@@ -23,6 +28,7 @@ export function Header({ selectedCompany, companies }: HeaderProps) {
                         size="small"
                         isSelected={selectedCompany === company.id}
                         leftIcon={<Icons.Outlined.Unit />}
+                        onClick={() => onClickCompany(company)}
                     >
                         {company.name}
                     </Button>
