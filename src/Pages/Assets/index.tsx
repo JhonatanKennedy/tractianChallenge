@@ -20,6 +20,10 @@ export function AssetsPage() {
             ],
             selectedCompany: '662fd0ee639069143a8fc387',
         },
+        filterProps: {
+            onClickFilter: (filters) => console.log(filters),
+            companyName: 'Apex unit',
+        },
     }
 
     return <AssetsTemplate {...props} />

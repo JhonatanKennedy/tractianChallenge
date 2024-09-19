@@ -1,0 +1,28 @@
+@import '../../../../../style/variables';
+
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.text-container {
+    h3 {
+        display: inline-block;
+        font-size: 20px;
+        font-weight: $semi-bold;
+        color: $text-dark;
+    }
+
+    h5 {
+        display: inline-block;
+        font-size: 14px;
+        font-weight: $normal;
+        color: $text-normal;
+    }
+}
+
+.actions-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
