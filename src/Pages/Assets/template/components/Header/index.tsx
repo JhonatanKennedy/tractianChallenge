@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Button } from '../../../../../components/Button'
 import { Icons } from '../../../../../icons'
 import styles from './styles.module.scss'
@@ -5,16 +6,24 @@ import styles from './styles.module.scss'
 export type CompanyType = { id: string; name: string }
 
 export type HeaderProps = {
-    selectedCompany: string
+    initialCompany: CompanyType
     companies: CompanyType[]
     onClickCompany: (company: CompanyType) => void
 }
 
 export function Header({
-    selectedCompany,
     companies,
+    initialCompany,
     onClickCompany,
 }: HeaderProps) {
+    const [selectedCompany, setSelectedCompany] =
+        useState<CompanyType>(initialCompany)
+
+    function handleClickCompany(company: CompanyType) {
+        setSelectedCompany(company)
+        onClickCompany(company)
+    }
+
     return (
         <div className={styles.container}>
             <div className={styles['logo-area']}>
@@ -26,9 +35,9 @@ export function Header({
                         key={company.id}
                         color="primary"
                         size="small"
-                        isSelected={selectedCompany === company.id}
+                        isSelected={selectedCompany.id === company.id}
                         leftIcon={<Icons.Outlined.Unit />}
-                        onClick={() => onClickCompany(company)}
+                        onClick={() => handleClickCompany(company)}
                     >
                         {company.name}
                     </Button>

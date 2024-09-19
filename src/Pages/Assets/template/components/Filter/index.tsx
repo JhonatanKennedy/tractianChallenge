@@ -51,6 +51,7 @@ export function Filter({ companyName, onClickFilter }: FilterProps) {
                     color="secondary"
                     leftIcon={<HiOutlineExclamationCircle />}
                     onClick={() => handleClickFilter(AssetFilter.ENERGY)}
+                    isSelected={selectedFilters.includes(AssetFilter.ENERGY)}
                 >
                     Sensor de Energia
                 </Button>
@@ -59,6 +60,7 @@ export function Filter({ companyName, onClickFilter }: FilterProps) {
                     color="secondary"
                     leftIcon={<HiOutlineExclamationCircle />}
                     onClick={() => handleClickFilter(AssetFilter.ALERT)}
+                    isSelected={selectedFilters.includes(AssetFilter.ALERT)}
                 >
                     Crítico
                 </Button>
