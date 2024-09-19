@@ -1,0 +1,41 @@
+@import '../../../../../../../style/variables';
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.title {
+    font-weight: $semi-bold;
+    font-size: 16px;
+    color: $text-dark;
+}
+
+.label {
+    font-size: 16px;
+    font-weight: $normal;
+    color: $text-light;
+
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    svg {
+        color: $primary;
+    }
+}
+
+.accountable-icon {
+    width: 24px;
+    height: 24px;
+    background-color: $primary;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $white;
+
+    font-size: 14px;
+}

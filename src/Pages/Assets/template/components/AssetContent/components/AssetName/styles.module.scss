@@ -1,0 +1,12 @@
+@import '../../../../../../../style/variables';
+
+.container {
+    padding: 16px 12px;
+    border-bottom: 1px solid $border-color;
+
+    h3 {
+        font-weight: $semi-bold;
+        font-size: 18px;
+        color: $text-dark;
+    }
+}

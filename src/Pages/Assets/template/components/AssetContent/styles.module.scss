@@ -1,0 +1,37 @@
+@import '../../../../../style/variables';
+
+.container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid $border-color;
+    border-radius: 2px;
+    flex: 1;
+}
+
+.data-container {
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    gap: 24px;
+}
+
+.general-data-container {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+
+.general-data {
+    width: 100%;
+    display: flex;
+    gap: 24px;
+    flex-direction: column;
+}
+
+.type-data {
+    display: flex;
+
+    div {
+        flex: 1;
+    }
+}
