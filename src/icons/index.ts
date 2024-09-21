@@ -1,17 +1,20 @@
 import { AiOutlineSearch } from 'react-icons/ai'
-import { IoChevronDownOutline, IoChevronUpOutline } from 'react-icons/io5'
+import { MdOutlineLocationOn } from 'react-icons/md'
+import { FaCodepen } from 'react-icons/fa'
+import {
+    IoCubeOutline,
+    IoChevronDownOutline,
+    IoChevronUpOutline,
+} from 'react-icons/io5'
 
 import UnitOutlined from '../assets/unit.svg?react'
 import Logo from '../assets/logo.svg?react'
-import Location from '../assets/location.svg?react'
-import Component from '../assets/component.svg?react'
-import Asset from '../assets/asset.svg?react'
 
 const Outlined = {
     Unit: UnitOutlined,
-    Location,
-    Asset,
-    Component,
+    Location: MdOutlineLocationOn,
+    Asset: IoCubeOutline,
+    Component: FaCodepen,
     ChevronDown: IoChevronDownOutline,
     ChevronUp: IoChevronUpOutline,
 }
