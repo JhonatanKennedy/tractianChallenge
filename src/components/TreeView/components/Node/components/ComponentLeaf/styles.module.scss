@@ -1,0 +1,50 @@
+@import '../../../../../../style/variables';
+
+%container {
+    padding: 2px 6px;
+
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    cursor: pointer;
+
+    .text-container {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+
+        color: $background-dark;
+
+        svg {
+            width: 22px;
+            height: 22px;
+            color: $primary;
+        }
+    }
+}
+
+.container-not-selected {
+    @extend %container;
+
+    .text-container {
+        color: $background-dark;
+
+        svg {
+            color: $primary;
+        }
+    }
+}
+
+.container-selected {
+    @extend %container;
+    background-color: $primary;
+
+    .text-container {
+        color: $white;
+
+        svg {
+            color: $white;
+        }
+    }
+}

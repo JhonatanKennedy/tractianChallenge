@@ -1,0 +1,39 @@
+@import '../../../../../../style/variables';
+
+.container {
+    padding: 2px 6px;
+
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    cursor: pointer;
+}
+
+.chevron-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 24px;
+    height: 24px;
+
+    svg {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+.text-container {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    color: $background-dark;
+
+    svg {
+        width: 22px;
+        height: 22px;
+        color: $primary;
+    }
+}
