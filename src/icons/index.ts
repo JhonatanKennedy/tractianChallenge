@@ -1,4 +1,5 @@
 import { AiOutlineSearch } from 'react-icons/ai'
+import { IoChevronDownOutline, IoChevronUpOutline } from 'react-icons/io5'
 
 import UnitOutlined from '../assets/unit.svg?react'
 import Logo from '../assets/logo.svg?react'
@@ -11,6 +12,8 @@ const Outlined = {
     Location,
     Asset,
     Component,
+    ChevronDown: IoChevronDownOutline,
+    ChevronUp: IoChevronUpOutline,
 }
 
 const Contained = {
