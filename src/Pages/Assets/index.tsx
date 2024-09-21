@@ -19,6 +19,7 @@ const companies = [
 ]
 
 export function AssetsPage() {
+    const [seachText, setSearchText] = useState('')
     const [selectedCompany, setSelectedCompany] = useState<CompanyType>(
         companies[0],
     )
@@ -40,6 +41,12 @@ export function AssetsPage() {
         filterProps: {
             onChangeFilter: handleChangeFilter,
             companyName: selectedCompany.name,
+        },
+        treeContentProps: {
+            searchInputProps: {
+                value: seachText,
+                onChange: setSearchText,
+            },
         },
     }
 
