@@ -19,10 +19,12 @@ const companies = [
 ]
 
 export function AssetsPage() {
-    const [companyName, setCompanyName] = useState<string>('')
+    const [selectedCompany, setSelectedCompany] = useState<CompanyType>(
+        companies[0],
+    )
 
     function handleChangeCompany(company: CompanyType) {
-        setCompanyName(company.name)
+        setSelectedCompany(company)
     }
 
     function handleChangeFilter(filters: FilterType) {
@@ -31,13 +33,13 @@ export function AssetsPage() {
 
     const props: AssetsTemplateProps = {
         headerProps: {
-            onClickCompany: handleChangeCompany,
+            onChangeCompany: handleChangeCompany,
             companies,
-            initialCompany: companies[0],
+            selectedCompany,
         },
         filterProps: {
             onClickFilter: handleChangeFilter,
-            companyName,
+            companyName: selectedCompany?.name,
         },
     }
 
