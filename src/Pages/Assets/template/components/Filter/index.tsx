@@ -14,11 +14,11 @@ enum AssetFilter {
 export type FilterType = AssetFilter[]
 
 export type FilterProps = {
-    onClickFilter: (filter: FilterType) => void
+    onChangeFilter: (filter: FilterType) => void
     companyName: string
 }
 
-export function Filter({ companyName, onClickFilter }: FilterProps) {
+export function Filter({ companyName, onChangeFilter }: FilterProps) {
     const [selectedFilters, setSelectedFilters] = useState<FilterType>([])
 
     function handleClickFilter(selectedFilter: AssetFilter) {
@@ -31,12 +31,12 @@ export function Filter({ companyName, onClickFilter }: FilterProps) {
         if (hasFilter) {
             filters.splice(existingFilterIndex, 1)
             setSelectedFilters(filters)
-            onClickFilter(filters)
+            onChangeFilter(filters)
             return
         }
 
         setSelectedFilters([...filters, selectedFilter])
-        onClickFilter([...filters, selectedFilter])
+        onChangeFilter([...filters, selectedFilter])
     }
 
     return (

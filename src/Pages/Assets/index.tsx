@@ -38,8 +38,8 @@ export function AssetsPage() {
             selectedCompany,
         },
         filterProps: {
-            onClickFilter: handleChangeFilter,
-            companyName: selectedCompany?.name,
+            onChangeFilter: handleChangeFilter,
+            companyName: selectedCompany.name,
         },
     }
 
