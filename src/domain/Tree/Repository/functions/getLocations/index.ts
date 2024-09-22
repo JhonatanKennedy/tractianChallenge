@@ -3,17 +3,19 @@ import { AxiosAdapter } from '../../../../infra/AxiosAdapter'
 
 type IAdapter = AxiosAdapter
 
-export type CompanyType = {
+export type LocationType = {
     id: string
     name: string
+    parentId: string | null
 }
 
-export async function _getCompanies(
+export async function _getLocations(
     adapter: IAdapter,
-): RepositoryReturnType<CompanyType[]> {
+    id: string,
+): RepositoryReturnType<LocationType[]> {
     try {
-        const url = '/companies'
-        const response = await adapter.get<CompanyType[]>(url)
+        const url = `/companies/${id}/locations`
+        const response = await adapter.get<LocationType[]>(url)
 
         return {
             data: response.data,
