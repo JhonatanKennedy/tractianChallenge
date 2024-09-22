@@ -1,7 +1,6 @@
 @import '../../style/variables';
 
 .container {
-    box-sizing: border-box;
     position: relative;
     width: 100%;
 
@@ -16,7 +15,6 @@
         font-weight: $normal;
         font-size: 14px;
 
-        box-sizing: border-box;
         outline: none;
         border: none;
         border-bottom: 1px solid $border-color;
@@ -25,7 +23,6 @@
 }
 
 %icon-container {
-    box-sizing: border-box;
     width: 14px;
     height: 100%;
 
