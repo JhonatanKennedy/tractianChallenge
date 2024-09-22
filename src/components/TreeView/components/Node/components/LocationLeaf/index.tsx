@@ -16,7 +16,7 @@ export function LocationLeaf({
 }: LocationLeafProps) {
     return (
         <div className={styles.container} onClick={onClickLocation}>
-            {hasChildren && (
+            {hasChildren ? (
                 <div className={styles['chevron-container']}>
                     {isActive ? (
                         <Icons.Outlined.ChevronDown />
@@ -24,7 +24,7 @@ export function LocationLeaf({
                         <Icons.Outlined.ChevronUp />
                     )}
                 </div>
-            )}
+            ) : null}
 
             <div className={styles['text-container']}>
                 <Icons.Outlined.Location />

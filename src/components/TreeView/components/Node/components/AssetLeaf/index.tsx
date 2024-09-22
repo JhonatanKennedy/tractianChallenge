@@ -16,7 +16,7 @@ export function AssetLeaf({
 }: AssetLeafProps) {
     return (
         <div className={styles.container} onClick={onClickAsset}>
-            {hasChildren && (
+            {hasChildren ? (
                 <div className={styles['chevron-container']}>
                     {isActive ? (
                         <Icons.Outlined.ChevronDown />
@@ -24,7 +24,7 @@ export function AssetLeaf({
                         <Icons.Outlined.ChevronUp />
                     )}
                 </div>
-            )}
+            ) : null}
 
             <div className={styles['text-container']}>
                 <Icons.Outlined.Asset />
