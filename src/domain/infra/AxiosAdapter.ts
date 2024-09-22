@@ -4,7 +4,7 @@ import { IAdapter } from './IAdapter'
 /* eslint-disable @typescript-eslint/no-explicit-any */
 class AxiosAdapter implements IAdapter {
     private axiosInstance = axios.create({
-        baseURL: 'http://fake-api.tractian.com/',
+        baseURL: 'http://fake-api.tractian.com',
         headers: {
             'Content-Type': 'application/json',
             Accept: '*/*',
