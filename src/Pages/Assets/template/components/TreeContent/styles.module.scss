@@ -1,7 +1,17 @@
 @import '../../../../../style/variables';
 
 .container {
+    display: flex;
+    flex-direction: column;
+
+    height: 100%;
     width: 37%;
     border: 1px solid $border-color;
     border-radius: 2px;
+}
+
+.tree-content {
+    flex: 1;
+    flex-basis: 0;
+    overflow: auto;
 }
