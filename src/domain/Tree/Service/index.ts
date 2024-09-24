@@ -1,8 +1,12 @@
-import { _formatTreeHash } from './functions/formatHashChildren'
-import { LocationType } from '../Repository'
+import { _findChildren, FindChildrenTypeAttr } from './functions/findChildren'
+import { _formatHash, FormatInitialHashAttr } from './functions/formatHash'
 
 export class Service {
-    formatTreeHash(locations: LocationType[]) {
-        return _formatTreeHash(locations)
+    formatHash(attrs: FormatInitialHashAttr) {
+        return _formatHash(attrs)
+    }
+
+    findChildren(attrs: FindChildrenTypeAttr) {
+        return _findChildren(attrs)
     }
 }
