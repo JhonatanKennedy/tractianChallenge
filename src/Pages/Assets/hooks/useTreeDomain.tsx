@@ -1,6 +1,10 @@
 import { useCallback, useEffect, useState } from 'react'
 import { TreeDomain } from '../../../domain/Tree/main'
-import { TreeNodeType } from '../../../domain/Tree/Service/IService'
+import { NodeType } from '../../../type/nodeType'
+import {
+    FormattedComponentType,
+    TreeNodeType,
+} from '../../../domain/Tree/Service/IService'
 
 export function useTreeDomain(unitId: string) {
     const [treeDomain] = useState(new TreeDomain())
@@ -8,6 +12,8 @@ export function useTreeDomain(unitId: string) {
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
     const [rootNodes, setRootNodes] = useState<TreeNodeType[]>([])
+    const [selectedNode, setSelectedNode] =
+        useState<FormattedComponentType | null>(null)
 
     const fetchData = useCallback(
         async (id: string) => {
@@ -21,7 +27,7 @@ export function useTreeDomain(unitId: string) {
                 }
 
                 const rootArray = treeDomain.getChildren()
-                setRootNodes(rootArray.data)
+                setRootNodes(rootArray)
                 setIsError(false)
             } finally {
                 setIsLoading(false)
@@ -38,11 +44,18 @@ export function useTreeDomain(unitId: string) {
 
     function handleChangeUnitId(id: string) {
         fetchData(id)
+        setSelectedNode(null)
     }
 
-    function handleNodeClick(id: string) {
-        const childrenArray = treeDomain.getChildren(id)
-        return childrenArray.data
+    function handleNodeClick(node: TreeNodeType) {
+        if (node.type === NodeType.COMPONENT) {
+            setSelectedNode(treeDomain.formatComponent(node))
+            return []
+        }
+
+        setSelectedNode(null)
+        const childrenArray = treeDomain.getChildren(node.id)
+        return childrenArray
     }
 
     return {
@@ -51,5 +64,6 @@ export function useTreeDomain(unitId: string) {
         isLoading,
         isError,
         handleNodeClick,
+        selectedNode,
     }
 }

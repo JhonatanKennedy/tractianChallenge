@@ -6,19 +6,19 @@ import styles from './styles.module.scss'
 import { TreeNodeType } from '../../../../domain/Tree/Service/IService'
 
 export type NodeProps = {
-    onClickNode: (value: string) => TreeNodeType[]
+    onClickNode: (value: TreeNodeType) => TreeNodeType[]
     node: TreeNodeType
 }
 
 export function Node({ node, onClickNode }: NodeProps) {
     const [children, setChildren] = useState<TreeNodeType[]>([])
 
-    function handleClickNode(id: string) {
+    function handleClickNode(node: TreeNodeType) {
         if (children.length !== 0) {
             setChildren([])
             return
         }
-        const childrenArray = onClickNode(id)
+        const childrenArray = onClickNode(node)
         setChildren(childrenArray)
     }
 
@@ -28,7 +28,7 @@ export function Node({ node, onClickNode }: NodeProps) {
                 <LocationLeaf
                     name={node.name}
                     isActive={children.length !== 0}
-                    onClickLocation={() => handleClickNode(node.id)}
+                    onClickLocation={() => handleClickNode(node)}
                     hasChildren={node.hasChildren}
                 />
                 {children.length !== 0 && (
@@ -42,7 +42,7 @@ export function Node({ node, onClickNode }: NodeProps) {
                                 <Node
                                     key={child.id}
                                     node={child}
-                                    onClickNode={(id) => onClickNode(id)}
+                                    onClickNode={onClickNode}
                                 />
                             ))}
                         </div>
@@ -58,7 +58,7 @@ export function Node({ node, onClickNode }: NodeProps) {
                 <AssetLeaf
                     name={node.name}
                     isActive={children.length !== 0}
-                    onClickAsset={() => handleClickNode(node.id)}
+                    onClickAsset={() => handleClickNode(node)}
                     hasChildren={node.hasChildren}
                 />
                 {children.length !== 0 && (
@@ -72,7 +72,7 @@ export function Node({ node, onClickNode }: NodeProps) {
                                 <Node
                                     key={child.id}
                                     node={child}
-                                    onClickNode={() => onClickNode(child.id)}
+                                    onClickNode={onClickNode}
                                 />
                             ))}
                         </div>
@@ -88,7 +88,7 @@ export function Node({ node, onClickNode }: NodeProps) {
                 name={node.name}
                 // TODO this will be implemented whey the click on assets and components starts
                 isActive={false}
-                onClickComponent={() => onClickNode(node.id)}
+                onClickComponent={() => onClickNode(node)}
             />
         </div>
     )

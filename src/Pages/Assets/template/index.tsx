@@ -1,4 +1,4 @@
-import { AssetContent } from './components/AssetContent'
+import { AssetContent, AssetContentProps } from './components/AssetContent'
 import { Card } from './components/Card'
 import { Filter, FilterProps } from './components/Filter'
 import { Header, HeaderProps } from './components/Header'
@@ -9,12 +9,14 @@ export type AssetsTemplateProps = {
     headerProps: HeaderProps
     filterProps: FilterProps
     treeContentProps: TreeContentProps
+    assetContentProps: AssetContentProps
 }
 
 export function AssetsTemplate({
     headerProps,
     filterProps,
     treeContentProps,
+    assetContentProps,
 }: AssetsTemplateProps) {
     return (
         <div className="container">
@@ -25,13 +27,7 @@ export function AssetsTemplate({
 
                     <div className="card-container">
                         <TreeContent {...treeContentProps} />
-                        <AssetContent
-                            assetName="MOTOR RT COAL AF01"
-                            componentName="Motor Elétrico (Trifásico)"
-                            sensorType={'Elétrica'}
-                            gatwayId="CXW988"
-                            sensorId="VEQ023"
-                        />
+                        <AssetContent {...assetContentProps} />
                     </div>
                 </Card>
             </div>

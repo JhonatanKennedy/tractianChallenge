@@ -4,7 +4,7 @@ import styles from './styles.module.scss'
 
 export type TreeViewProps = {
     nodes: TreeNodeType[]
-    onClickNode: (id: string) => TreeNodeType[]
+    onClickNode: (id: TreeNodeType) => TreeNodeType[]
 }
 
 export function TreeView({ nodes, onClickNode }: TreeViewProps) {

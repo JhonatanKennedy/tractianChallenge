@@ -7,9 +7,8 @@ import { useTreeDomain } from './hooks/useTreeDomain'
 
 export function AssetsPage() {
     const { companies, selectedCompany, setSelectedCompany } = useUnitDomain()
-    const { rootNodes, handleChangeUnitId, handleNodeClick } = useTreeDomain(
-        selectedCompany.id,
-    )
+    const { rootNodes, selectedNode, handleChangeUnitId, handleNodeClick } =
+        useTreeDomain(selectedCompany.id)
 
     const [seachText, setSearchText] = useState('')
 
@@ -41,6 +40,9 @@ export function AssetsPage() {
                 nodes: rootNodes,
                 onClickNode: handleNodeClick,
             },
+        },
+        assetContentProps: {
+            asset: selectedNode,
         },
     }
 
