@@ -1,6 +1,12 @@
 import { _findChildren } from './functions/findChildren'
+import { _formatComponent } from './functions/formatComponent'
 import { _formatHash } from './functions/formatHash'
-import { FindChildrenTypeAttr, FormatHashTypeAttrs, IService } from './IService'
+import {
+    ComponentHashType,
+    FindChildrenTypeAttr,
+    FormatHashTypeAttrs,
+    IService,
+} from './IService'
 
 export class Service implements IService {
     formatHash(attrs: FormatHashTypeAttrs) {
@@ -9,5 +15,9 @@ export class Service implements IService {
 
     findChildren(attrs: FindChildrenTypeAttr) {
         return _findChildren(attrs)
+    }
+
+    formatComponent(component: ComponentHashType) {
+        return _formatComponent(component)
     }
 }
