@@ -1,14 +1,7 @@
 import { AxiosAdapter } from '../../infra/AxiosAdapter'
-import { _getLocations, LocationType } from './functions/getLocations'
-import {
-    _getAssets,
-    AssetsType,
-    SensorTypeType,
-    StatusType,
-} from './functions/getAssets'
+import { _getLocations } from './functions/getLocations'
+import { _getAssets } from './functions/getAssets'
 
-export { type LocationType }
-export { type AssetsType, type SensorTypeType, type StatusType }
 export class Repository {
     constructor(private readonly adapter: AxiosAdapter) {}
 

@@ -1,13 +1,8 @@
 import { RepositoryReturnType } from '../../../../../type/repositoryReturnType'
 import { AxiosAdapter } from '../../../../infra/AxiosAdapter'
+import { LocationType } from '../../IRepository'
 
 type IAdapter = AxiosAdapter
-
-export type LocationType = {
-    id: string
-    name: string
-    parentId: string | null
-}
 
 export async function _getLocations(
     adapter: IAdapter,

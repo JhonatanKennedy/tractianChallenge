@@ -1,20 +1,8 @@
 import { RepositoryReturnType } from '../../../../../type/repositoryReturnType'
 import { AxiosAdapter } from '../../../../infra/AxiosAdapter'
+import { AssetsType } from '../../IRepository'
 
 type IAdapter = AxiosAdapter
-
-export type SensorTypeType = 'vibration' | 'energy' | null
-export type StatusType = 'operating' | 'alert' | null
-
-//TODO se nao tem locationId ou parentId não é de nenhum nó da arvore
-export type AssetsType = {
-    id: string
-    name: string
-    parentId: string | null
-    locationId: string | null
-    sensorType: SensorTypeType
-    status: StatusType
-}
 
 export async function _getAssets(
     adapter: IAdapter,
