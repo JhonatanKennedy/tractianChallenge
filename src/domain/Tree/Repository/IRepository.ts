@@ -16,6 +16,8 @@ export type AssetsType = {
     locationId: string | null
     sensorType: SensorTypeType
     status: StatusType
+    gatewayId?: string
+    sensorId?: string
 }
 
 export interface IRepository {
