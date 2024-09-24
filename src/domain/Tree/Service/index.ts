@@ -1,8 +1,9 @@
-import { _findChildren, FindChildrenTypeAttr } from './functions/findChildren'
-import { _formatHash, FormatInitialHashAttr } from './functions/formatHash'
+import { _findChildren } from './functions/findChildren'
+import { _formatHash } from './functions/formatHash'
+import { FindChildrenTypeAttr, FormatHashTypeAttrs, IService } from './IService'
 
-export class Service {
-    formatHash(attrs: FormatInitialHashAttr) {
+export class Service implements IService {
+    formatHash(attrs: FormatHashTypeAttrs) {
         return _formatHash(attrs)
     }
 

@@ -1,11 +1,12 @@
 import { axiosAdapter } from '../infra/AxiosAdapter'
 import { Repository } from './Repository'
+import { IRepository } from './Repository/IRepository'
 import { Service } from './Service'
-import { NodeHashType } from './Service/functions/formatHash'
+import { IService, NodeHashType } from './Service/IService'
 
 export class TreeDomain {
-    private repository: Repository
-    private service: Service
+    private repository: IRepository
+    private service: IService
 
     private hashNodes = {} as NodeHashType
 
@@ -39,7 +40,7 @@ export class TreeDomain {
         }
     }
 
-    getChildren(id: string = 'null') {
+    getChildren(id: string = 'root') {
         const children = this.service.findChildren({
             id,
             hashNodes: this.hashNodes,
