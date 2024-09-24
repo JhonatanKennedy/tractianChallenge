@@ -13,8 +13,8 @@ export function ComponentLeaf({
     onClickComponent,
 }: ComponentLeaf) {
     const className = isActive
-        ? styles['container-not-selected']
-        : styles['container-selected']
+        ? styles['container-selected']
+        : styles['container-not-selected']
 
     return (
         <div className={className} onClick={onClickComponent}>
