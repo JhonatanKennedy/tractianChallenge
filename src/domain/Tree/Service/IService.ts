@@ -6,7 +6,7 @@ import {
     ComponentType,
 } from '../Repository/IRepository'
 
-export type FormatHashTypeAttrs = {
+export type FormatArrayNodeAttrs = {
     locations: LocationType[]
     assets: AssetsType[]
 }
@@ -18,23 +18,35 @@ export type FindChildrenTypeAttr = {
 
 type LocationHashType = LocationType & {
     type: NodeType.LOCATION
-    hasChildren: boolean
+    isSelected: boolean
+    isEnergy: boolean
+    isCritical: boolean
 }
 
 type AssetHashType = AssetType & {
     type: NodeType.ASSET
-    hasChildren: boolean
+    isSelected: boolean
+    isEnergy: boolean
+    isCritical: boolean
 }
 
-export type ComponentHashType = ComponentType & {
+type ComponentHashType = ComponentType & {
     type: NodeType.COMPONENT
-    hasChildren: boolean
+    isSelected: boolean
+    isEnergy: boolean
+    isCritical: boolean
 }
 
-export type TreeNodeType = LocationHashType | AssetHashType | ComponentHashType
+export type TreeNodeType = (
+    | LocationHashType
+    | AssetHashType
+    | ComponentHashType
+) & {
+    children: string[]
+}
 
 export type NodeHashType = {
-    [key: string]: TreeNodeType[]
+    [key: string]: TreeNodeType
 }
 
 export type FormattedComponentType = {
@@ -46,7 +58,8 @@ export type FormattedComponentType = {
 }
 
 export interface IService {
-    formatHash(attrs: FormatHashTypeAttrs): NodeHashType
-    findChildren(attrs: FindChildrenTypeAttr): TreeNodeType[]
-    formatComponent(component: ComponentHashType): FormattedComponentType
+    formatArrayNode(attrs: FormatArrayNodeAttrs): TreeNodeType[]
+    findRootNodes(array: TreeNodeType[]): string[]
+    formatHash(array: TreeNodeType[]): NodeHashType
+    formatComponent(component: TreeNodeType): FormattedComponentType | null
 }

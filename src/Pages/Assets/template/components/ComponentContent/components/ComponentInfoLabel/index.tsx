@@ -1,15 +1,15 @@
 import { MdOutlineRouter, MdOutlineWifiTethering } from 'react-icons/md'
 import styles from './styles.module.scss'
 
-type AssetInfoLabelProps = {
+type ComponentInfoLabelProps = {
     label: string
     type?: 'component-name' | 'accountable' | 'sensor' | 'receptor'
 }
 
-export function AssetInfoLabel({
+export function ComponentInfoLabel({
     label,
     type = 'component-name',
-}: AssetInfoLabelProps) {
+}: ComponentInfoLabelProps) {
     const firsLetter = label[0]
 
     if (type === 'accountable') {

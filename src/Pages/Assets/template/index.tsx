@@ -1,23 +1,26 @@
-import { AssetContent, AssetContentProps } from './components/AssetContent'
+import {
+    ComponentContent,
+    ComponentContentProps,
+} from './components/ComponentContent'
 import { Card } from './components/Card'
 import { Filter, FilterProps } from './components/Filter'
 import { Header, HeaderProps } from './components/Header'
 import { TreeContent, TreeContentProps } from './components/TreeContent'
 import './styles.scss'
 
-export type AssetsTemplateProps = {
+export type ComponentTemplateProps = {
     headerProps: HeaderProps
     filterProps: FilterProps
     treeContentProps: TreeContentProps
-    assetContentProps: AssetContentProps
+    componentContentProps: ComponentContentProps
 }
 
-export function AssetsTemplate({
+export function ComponentTemplate({
     headerProps,
     filterProps,
     treeContentProps,
-    assetContentProps,
-}: AssetsTemplateProps) {
+    componentContentProps,
+}: ComponentTemplateProps) {
     return (
         <div className="container">
             <Header {...headerProps} />
@@ -27,7 +30,7 @@ export function AssetsTemplate({
 
                     <div className="card-container">
                         <TreeContent {...treeContentProps} />
-                        <AssetContent {...assetContentProps} />
+                        <ComponentContent {...componentContentProps} />
                     </div>
                 </Card>
             </div>

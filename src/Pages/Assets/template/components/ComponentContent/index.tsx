@@ -1,10 +1,10 @@
 import { Separator } from '../../../../../components/Separator'
-import { AssetImage } from './components/AssetImage'
-import { AssetInfoLabel } from './components/AssetInfoLabel'
-import { AssetName } from './components/AssetName'
+import { ComponentImage } from './components/ComponentImage'
+import { ComponentInfoLabel } from './components/ComponentInfoLabel'
+import { ComponentName } from './components/ComponentName'
 import styles from './styles.module.scss'
 
-type AssetProps = {
+type CompomentProps = {
     name: string
     gatewayId: string
     sensorId: string
@@ -12,32 +12,32 @@ type AssetProps = {
     sensorLabel: string
 }
 
-export type AssetContentProps = {
-    asset: AssetProps | null
+export type ComponentContentProps = {
+    component: CompomentProps | null
 }
 
-export function AssetContent({ asset }: AssetContentProps) {
-    if (!asset) {
+export function ComponentContent({ component }: ComponentContentProps) {
+    if (!component) {
         // TODO implement empty state
         return <div className={styles.container}></div>
     }
 
     return (
         <div className={styles.container}>
-            <AssetName title={asset.name} />
+            <ComponentName title={component.name} />
             <div className={styles['data-container']}>
                 <div className={styles['general-data-container']}>
-                    <AssetImage />
+                    <ComponentImage />
 
                     <div className={styles['general-data']}>
-                        <AssetInfoLabel
+                        <ComponentInfoLabel
                             type="component-name"
-                            label={asset.name}
+                            label={component.name}
                         />
                         <Separator />
-                        <AssetInfoLabel
+                        <ComponentInfoLabel
                             type="accountable"
-                            label={asset.sensorLabel}
+                            label={component.sensorLabel}
                         />
                     </div>
                 </div>
@@ -46,12 +46,15 @@ export function AssetContent({ asset }: AssetContentProps) {
 
                 <div className={styles['type-data']}>
                     <div>
-                        <AssetInfoLabel type="sensor" label={asset.sensorId} />
+                        <ComponentInfoLabel
+                            type="sensor"
+                            label={component.sensorId}
+                        />
                     </div>
                     <div>
-                        <AssetInfoLabel
+                        <ComponentInfoLabel
                             type="receptor"
-                            label={asset.gatewayId}
+                            label={component.gatewayId}
                         />
                     </div>
                 </div>

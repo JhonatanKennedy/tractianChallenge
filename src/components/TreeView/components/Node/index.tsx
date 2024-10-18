@@ -1,95 +1,43 @@
-import { useState } from 'react'
 import { AssetLeaf } from './components/AssetLeaf'
 import { ComponentLeaf } from './components/ComponentLeaf'
 import { LocationLeaf } from './components/LocationLeaf'
-import styles from './styles.module.scss'
-import { TreeNodeType } from '../../../../domain/Tree/Service/IService'
 
 export type NodeProps = {
-    onClickNode: (value: TreeNodeType) => TreeNodeType[]
-    node: TreeNodeType
+    name: string
+    isActive: boolean
+    hasChildren: boolean
+    type: 'location' | 'asset' | 'component'
+    onClickNode: () => void
 }
 
-export function Node({ node, onClickNode }: NodeProps) {
-    const [children, setChildren] = useState<TreeNodeType[]>([])
-
-    function handleClickNode(node: TreeNodeType) {
-        if (children.length !== 0) {
-            setChildren([])
-            return
-        }
-        const childrenArray = onClickNode(node)
-        setChildren(childrenArray)
-    }
-
-    if (node.type === 'location') {
+export function Node(props: NodeProps) {
+    if (props.type === 'location') {
         return (
-            <div>
-                <LocationLeaf
-                    name={node.name}
-                    isActive={children.length !== 0}
-                    onClickLocation={() => handleClickNode(node)}
-                    hasChildren={node.hasChildren}
-                />
-                {children.length !== 0 && (
-                    <div className={styles['nodes-container']}>
-                        <div className={styles['trail-container']}>
-                            <div className={styles.trail} />
-                        </div>
-
-                        <div className={styles['children-container']}>
-                            {children.map((child) => (
-                                <Node
-                                    key={child.id}
-                                    node={child}
-                                    onClickNode={onClickNode}
-                                />
-                            ))}
-                        </div>
-                    </div>
-                )}
-            </div>
+            <LocationLeaf
+                name={props.name}
+                isActive={props.isActive}
+                onClickLocation={props.onClickNode}
+                hasChildren={props.hasChildren}
+            />
         )
     }
 
-    if (node.type === 'asset') {
+    if (props.type === 'asset') {
         return (
-            <div>
-                <AssetLeaf
-                    name={node.name}
-                    isActive={children.length !== 0}
-                    onClickAsset={() => handleClickNode(node)}
-                    hasChildren={node.hasChildren}
-                />
-                {children.length !== 0 && (
-                    <div className={styles['nodes-container']}>
-                        <div className={styles['trail-container']}>
-                            <div className={styles.trail} />
-                        </div>
-
-                        <div className={styles['children-container']}>
-                            {children.map((child) => (
-                                <Node
-                                    key={child.id}
-                                    node={child}
-                                    onClickNode={onClickNode}
-                                />
-                            ))}
-                        </div>
-                    </div>
-                )}
-            </div>
+            <AssetLeaf
+                name={props.name}
+                isActive={props.isActive}
+                onClickAsset={props.onClickNode}
+                hasChildren={props.hasChildren}
+            />
         )
     }
 
     return (
-        <div>
-            <ComponentLeaf
-                name={node.name}
-                // TODO this will be implemented whey the click on assets and components starts
-                isActive={false}
-                onClickComponent={() => onClickNode(node)}
-            />
-        </div>
+        <ComponentLeaf
+            name={props.name}
+            isActive={props.isActive}
+            onClickComponent={props.onClickNode}
+        />
     )
 }

@@ -2,20 +2,26 @@ import { axiosAdapter } from '../infra/AxiosAdapter'
 import { Repository } from './Repository'
 import { IRepository } from './Repository/IRepository'
 import { Service } from './Service'
-import { ComponentHashType, IService, NodeHashType } from './Service/IService'
+import { IService, NodeHashType, TreeNodeType } from './Service/IService'
 
 export class TreeDomain {
     private repository: IRepository
     private service: IService
 
-    private hashNodes = {} as NodeHashType
+    private searchArray: TreeNodeType[] = []
+    rootNodes: string[] = []
+    hashNodes = {} as NodeHashType
 
     constructor() {
         this.repository = new Repository(axiosAdapter)
         this.service = new Service()
     }
 
-    async getLocations(id: string) {
+    formatComponent(component: TreeNodeType) {
+        return this.service.formatComponent(component)
+    }
+
+    async getItems(id: string) {
         const responseLocation = await this.repository.getLocations(id)
 
         if (!responseLocation.data) {
@@ -28,10 +34,15 @@ export class TreeDomain {
             return responseAsset
         }
 
-        this.hashNodes = this.service.formatHash({
+        const searchArray = this.service.formatArrayNode({
             assets: responseAsset.data,
             locations: responseLocation.data,
         })
+
+        const hash = this.service.formatHash(searchArray)
+
+        this.searchArray = searchArray
+        this.hashNodes = hash
 
         return {
             data: true,
@@ -40,14 +51,7 @@ export class TreeDomain {
         }
     }
 
-    getChildren(id: string = 'root') {
-        return this.service.findChildren({
-            id,
-            hashNodes: this.hashNodes,
-        })
-    }
-
-    formatComponent(component: ComponentHashType) {
-        return this.service.formatComponent(component)
+    getRootNodes() {
+        this.rootNodes = this.service.findRootNodes(this.searchArray)
     }
 }

@@ -1,23 +1,23 @@
-import { _findChildren } from './functions/findChildren'
+import { _findRootNodes } from './functions/findRootNodes'
+import { _formatArrayNode } from './functions/formatArrayNode'
 import { _formatComponent } from './functions/formatComponent'
 import { _formatHash } from './functions/formatHash'
-import {
-    ComponentHashType,
-    FindChildrenTypeAttr,
-    FormatHashTypeAttrs,
-    IService,
-} from './IService'
+import { FormatArrayNodeAttrs, IService, TreeNodeType } from './IService'
 
 export class Service implements IService {
-    formatHash(attrs: FormatHashTypeAttrs) {
+    formatArrayNode(attrs: FormatArrayNodeAttrs) {
+        return _formatArrayNode(attrs)
+    }
+
+    findRootNodes(array: TreeNodeType[]) {
+        return _findRootNodes(array)
+    }
+
+    formatHash(attrs: TreeNodeType[]) {
         return _formatHash(attrs)
     }
 
-    findChildren(attrs: FindChildrenTypeAttr) {
-        return _findChildren(attrs)
-    }
-
-    formatComponent(component: ComponentHashType) {
+    formatComponent(component: TreeNodeType) {
         return _formatComponent(component)
     }
 }

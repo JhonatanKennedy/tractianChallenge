@@ -4,7 +4,7 @@ type AssetName = {
     title: string
 }
 
-export function AssetName({ title }: AssetName) {
+export function ComponentName({ title }: AssetName) {
     return (
         <div className={styles.container}>
             <h3>{title}</h3>

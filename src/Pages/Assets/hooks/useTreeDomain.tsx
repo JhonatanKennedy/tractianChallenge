@@ -1,17 +1,14 @@
 import { useCallback, useEffect, useState } from 'react'
 import { TreeDomain } from '../../../domain/Tree/main'
 import { NodeType } from '../../../type/nodeType'
-import {
-    FormattedComponentType,
-    TreeNodeType,
-} from '../../../domain/Tree/Service/IService'
+import { FormattedComponentType } from '../../../domain/Tree/Service/IService'
 
 export function useTreeDomain(unitId: string) {
     const [treeDomain] = useState(new TreeDomain())
 
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
-    const [rootNodes, setRootNodes] = useState<TreeNodeType[]>([])
+    const [rootNodes, setRootNodes] = useState<string[]>([])
     const [selectedNode, setSelectedNode] =
         useState<FormattedComponentType | null>(null)
 
@@ -20,14 +17,14 @@ export function useTreeDomain(unitId: string) {
             try {
                 setIsLoading(true)
 
-                const response = await treeDomain.getLocations(id)
+                const response = await treeDomain.getItems(id)
                 if (!response.data) {
                     setIsError(true)
                     return
                 }
 
-                const rootArray = treeDomain.getChildren()
-                setRootNodes(rootArray)
+                treeDomain.getRootNodes()
+                setRootNodes(treeDomain.rootNodes)
                 setIsError(false)
             } finally {
                 setIsLoading(false)
@@ -47,19 +44,18 @@ export function useTreeDomain(unitId: string) {
         setSelectedNode(null)
     }
 
-    function handleNodeClick(node: TreeNodeType) {
-        if (node.type === NodeType.COMPONENT) {
-            setSelectedNode(treeDomain.formatComponent(node))
-            return []
-        }
+    function handleNodeClick(id: string) {
+        const hash = treeDomain.hashNodes[id]
 
-        setSelectedNode(null)
-        const childrenArray = treeDomain.getChildren(node.id)
-        return childrenArray
+        if (hash.type === NodeType.COMPONENT) {
+            setSelectedNode(treeDomain.formatComponent(hash))
+            return
+        }
     }
 
     return {
         rootNodes,
+        hash: treeDomain.hashNodes,
         handleChangeUnitId,
         isLoading,
         isError,

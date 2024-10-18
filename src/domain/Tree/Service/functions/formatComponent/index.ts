@@ -1,17 +1,18 @@
-import { ComponentHashType, FormattedComponentType } from '../../IService'
+import { FormattedComponentType, TreeNodeType } from '../../IService'
 
 export function _formatComponent(
-    component: ComponentHashType,
-): FormattedComponentType {
-    const sensorLabel =
-        component.sensorType === 'energy' ? 'Elétrica' : 'Mecânica'
+    hash: TreeNodeType,
+): FormattedComponentType | null {
+    if (hash.type !== 'component') return null
 
-    const isCritical = component.status === 'alert'
+    const sensorLabel = hash.sensorType === 'energy' ? 'Elétrica' : 'Mecânica'
+
+    const isCritical = hash.status === 'alert'
 
     return {
-        sensorId: component.sensorId,
-        gatewayId: component.gatewayId,
-        name: component.name,
+        sensorId: hash.sensorId,
+        gatewayId: hash.gatewayId,
+        name: hash.name,
         isCritical,
         sensorLabel,
     }

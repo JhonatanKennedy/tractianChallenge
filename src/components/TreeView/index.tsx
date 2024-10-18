@@ -1,18 +1,22 @@
-import { Node } from './components/Node'
-import { TreeNodeType } from '../../domain/Tree/Service/IService'
 import styles from './styles.module.scss'
+import { NodeHashType } from '../../domain/Tree/Service/IService'
+import { ListNodes } from './components/ListNodes'
+import { TreeViewProvider } from './context'
 
 export type TreeViewProps = {
-    nodes: TreeNodeType[]
-    onClickNode: (id: TreeNodeType) => TreeNodeType[]
+    rootNodes: string[]
+    hash: NodeHashType
+    onClickNode: (id: string) => void
 }
 
-export function TreeView({ nodes, onClickNode }: TreeViewProps) {
+export function TreeView({ rootNodes, hash, onClickNode }: TreeViewProps) {
     return (
-        <div className={styles.container}>
-            {nodes.map((node) => (
-                <Node key={node.id} node={node} onClickNode={onClickNode} />
-            ))}
-        </div>
+        <TreeViewProvider hash={hash}>
+            <div className={styles.container}>
+                {rootNodes.map((id) => (
+                    <ListNodes key={id} id={id} onClickNode={onClickNode} />
+                ))}
+            </div>
+        </TreeViewProvider>
     )
 }
