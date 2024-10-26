@@ -3,25 +3,21 @@ import { Button } from '../../../../../components/Button'
 import styles from './styles.module.scss'
 import { useState } from 'react'
 
-//TODO correct this later
-// energy = sensorType
-// alert = status
-enum AssetFilter {
+// eslint-disable-next-line react-refresh/only-export-components
+export enum FilterType {
     ENERGY = 'energy',
-    ALERT = 'alert',
+    CRITICAL = 'critical',
 }
 
-export type FilterType = AssetFilter[]
-
 export type FilterProps = {
-    onChangeFilter: (filter: FilterType) => void
+    onChangeFilter: (filter: FilterType[]) => void
     companyName: string
 }
 
 export function Filter({ companyName, onChangeFilter }: FilterProps) {
-    const [selectedFilters, setSelectedFilters] = useState<FilterType>([])
+    const [selectedFilters, setSelectedFilters] = useState<FilterType[]>([])
 
-    function handleClickFilter(selectedFilter: AssetFilter) {
+    function handleClickFilter(selectedFilter: FilterType) {
         const filters = [...selectedFilters]
         const existingFilterIndex = filters.findIndex(
             (filter) => filter === selectedFilter,
@@ -50,8 +46,8 @@ export function Filter({ companyName, onChangeFilter }: FilterProps) {
                     size="medium"
                     color="secondary"
                     leftIcon={<HiOutlineExclamationCircle />}
-                    onClick={() => handleClickFilter(AssetFilter.ENERGY)}
-                    isSelected={selectedFilters.includes(AssetFilter.ENERGY)}
+                    onClick={() => handleClickFilter(FilterType.ENERGY)}
+                    isSelected={selectedFilters.includes(FilterType.ENERGY)}
                 >
                     Sensor de Energia
                 </Button>
@@ -59,8 +55,8 @@ export function Filter({ companyName, onChangeFilter }: FilterProps) {
                     size="medium"
                     color="secondary"
                     leftIcon={<HiOutlineExclamationCircle />}
-                    onClick={() => handleClickFilter(AssetFilter.ALERT)}
-                    isSelected={selectedFilters.includes(AssetFilter.ALERT)}
+                    onClick={() => handleClickFilter(FilterType.CRITICAL)}
+                    isSelected={selectedFilters.includes(FilterType.CRITICAL)}
                 >
                     Crítico
                 </Button>

@@ -1,34 +1,39 @@
 import { createContext, useState, useContext, ReactNode } from 'react'
-import { NodeHashType } from '../../domain/Tree/Service/IService'
+import { NodeHashType, TreeNodeType } from '../../domain/Tree/Service/IService'
 
 type TreeViewProviderProps = {
     children: ReactNode
     hash: NodeHashType
+    onSelectNode: (id: string) => void
 }
 
 type TreeViewContextProps = {
     selectedId: string
     handleSelectedValue: (id: string) => void
-    hash: NodeHashType
+    getHashNode: (id: string) => TreeNodeType
 }
 
 const TreeViewContext = createContext({} as TreeViewContextProps)
 
-function TreeViewProvider({ children, hash }: TreeViewProviderProps) {
+function TreeViewProvider({
+    children,
+    hash,
+    onSelectNode,
+}: TreeViewProviderProps) {
     const [selectedId, setSelectedId] = useState<string>('')
 
-    function handleSelectedValue(id: string) {
-        if (id === selectedId) {
-            setSelectedId('')
-            return
-        }
+    function getHashNode(id: string): TreeNodeType {
+        return hash[id]
+    }
 
+    function handleSelectedValue(id: string) {
         setSelectedId(id)
+        onSelectNode(id)
     }
 
     return (
         <TreeViewContext.Provider
-            value={{ selectedId, handleSelectedValue, hash }}
+            value={{ selectedId, handleSelectedValue, getHashNode }}
         >
             {children}
         </TreeViewContext.Provider>

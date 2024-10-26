@@ -16,23 +16,25 @@ export type FindChildrenTypeAttr = {
     id: string
 }
 
+export type FillFiltersAttrs = {
+    rootIds: string[]
+    hash: NodeHashType
+}
+
 type LocationHashType = LocationType & {
     type: NodeType.LOCATION
-    isSelected: boolean
     isEnergy: boolean
     isCritical: boolean
 }
 
 type AssetHashType = AssetType & {
     type: NodeType.ASSET
-    isSelected: boolean
     isEnergy: boolean
     isCritical: boolean
 }
 
 type ComponentHashType = ComponentType & {
     type: NodeType.COMPONENT
-    isSelected: boolean
     isEnergy: boolean
     isCritical: boolean
 }
@@ -62,4 +64,5 @@ export interface IService {
     findRootNodes(array: TreeNodeType[]): string[]
     formatHash(array: TreeNodeType[]): NodeHashType
     formatComponent(component: TreeNodeType): FormattedComponentType | null
+    fillFilters(attrs: FillFiltersAttrs): NodeHashType
 }

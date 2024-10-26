@@ -5,34 +5,40 @@ import { useTreeViewContext } from '../../context'
 
 export type ListNodesProps = {
     id: string
-    onClickNode: (id: string) => void
+    hide?: boolean
 }
 
-export function ListNodes({ id, onClickNode }: ListNodesProps) {
+export function ListNodes({ id, hide }: ListNodesProps) {
     const [open, setOpen] = useState(false)
-    const { hash, handleSelectedValue, selectedId } = useTreeViewContext()
+    const { selectedId, handleSelectedValue, getHashNode } =
+        useTreeViewContext()
 
-    const hasChildren = hash[id].children.length !== 0
+    const hashNode = getHashNode(id)
+
+    const hasChildren = hashNode.children.length !== 0
     const listSelected = selectedId === id
-    const isSelected = hash[id].type === 'component' ? listSelected : open
+    const isSelected = hashNode.type === 'component' ? listSelected : open
 
     function handleNodeClick(nodeId: string) {
-        if (hash[nodeId].type === 'component') {
+        if (getHashNode(id).type === 'component') {
             handleSelectedValue(nodeId)
-            onClickNode(nodeId)
             return
         }
         setOpen(!open)
     }
 
+    if (hide) {
+        return null
+    }
+
     return (
         <div>
             <Node
-                name={hash[id].name}
+                name={hashNode.name}
                 isActive={isSelected}
                 onClickNode={() => handleNodeClick(id)}
                 hasChildren={hasChildren}
-                type={hash[id].type}
+                type={hashNode.type}
             />
             {open ? (
                 <div className={styles['nodes-container']}>
@@ -41,12 +47,8 @@ export function ListNodes({ id, onClickNode }: ListNodesProps) {
                     </div>
 
                     <div className={styles['children-container']}>
-                        {hash[id].children.map((id) => (
-                            <ListNodes
-                                key={id}
-                                id={id}
-                                onClickNode={handleNodeClick}
-                            />
+                        {hashNode.children.map((id) => (
+                            <ListNodes key={id} id={id} />
                         ))}
                     </div>
                 </div>

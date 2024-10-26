@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { ComponentTemplate, ComponentTemplateProps } from './template'
 import { CompanyType } from './template/components/Header'
-import { FilterType } from './template/components/Filter'
 import { useUnitDomain } from './hooks/useUnitDomain'
 import { useTreeDomain } from './hooks/useTreeDomain'
 
@@ -13,6 +12,8 @@ export function AssetsPage() {
         handleChangeUnitId,
         hash,
         handleNodeClick,
+        filters,
+        setFilters,
     } = useTreeDomain(selectedCompany.id)
 
     const [seachText, setSearchText] = useState('')
@@ -22,10 +23,6 @@ export function AssetsPage() {
         handleChangeUnitId(company.id)
     }
 
-    function handleChangeFilter(filters: FilterType) {
-        console.log(filters)
-    }
-
     const props: ComponentTemplateProps = {
         headerProps: {
             onChangeCompany: handleChangeCompany,
@@ -33,7 +30,7 @@ export function AssetsPage() {
             selectedCompany,
         },
         filterProps: {
-            onChangeFilter: handleChangeFilter,
+            onChangeFilter: setFilters,
             companyName: selectedCompany.name,
         },
         treeContentProps: {
@@ -43,8 +40,9 @@ export function AssetsPage() {
             },
             treeProps: {
                 rootNodes,
-                hash,
+                hashNodes: hash,
                 onClickNode: handleNodeClick,
+                filters,
             },
         },
         componentContentProps: {

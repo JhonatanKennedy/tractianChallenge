@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { TreeDomain } from '../../../domain/Tree/main'
 import { NodeType } from '../../../type/nodeType'
 import { FormattedComponentType } from '../../../domain/Tree/Service/IService'
+import { FilterType } from '../template/components/Filter'
 
 export function useTreeDomain(unitId: string) {
     const [treeDomain] = useState(new TreeDomain())
@@ -11,6 +12,8 @@ export function useTreeDomain(unitId: string) {
     const [rootNodes, setRootNodes] = useState<string[]>([])
     const [selectedNode, setSelectedNode] =
         useState<FormattedComponentType | null>(null)
+
+    const [filters, setFilters] = useState<FilterType[]>([])
 
     const fetchData = useCallback(
         async (id: string) => {
@@ -61,5 +64,7 @@ export function useTreeDomain(unitId: string) {
         isError,
         handleNodeClick,
         selectedNode,
+        filters,
+        setFilters,
     }
 }

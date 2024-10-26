@@ -1,7 +1,7 @@
 import { NodeType } from '../../../../../type/nodeType'
-import { FormatHashTypeAttrs, TreeNodeType } from '../../IService'
+import { FormatArrayNodeAttrs, TreeNodeType } from '../../IService'
 
-export function _formatArrayNode(attrs: FormatHashTypeAttrs): TreeNodeType[] {
+export function _formatArrayNode(attrs: FormatArrayNodeAttrs): TreeNodeType[] {
     const arrayNode = []
 
     for (const location of attrs.locations) {
@@ -9,7 +9,6 @@ export function _formatArrayNode(attrs: FormatHashTypeAttrs): TreeNodeType[] {
             ...location,
             type: NodeType.LOCATION,
             children: [],
-            isSelected: false,
             isCritical: false,
             isEnergy: false,
         } as TreeNodeType
@@ -23,9 +22,8 @@ export function _formatArrayNode(attrs: FormatHashTypeAttrs): TreeNodeType[] {
             ...asset,
             type,
             children: [],
-            isSelected: false,
-            isCritical: false,
-            isEnergy: false,
+            isCritical: asset.status === 'alert',
+            isEnergy: asset.sensorType === 'energy',
         } as TreeNodeType
 
         arrayNode.push(node)
