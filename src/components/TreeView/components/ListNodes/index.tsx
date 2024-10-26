@@ -5,10 +5,9 @@ import { useTreeViewContext } from '../../context'
 
 export type ListNodesProps = {
     id: string
-    hide?: boolean
 }
 
-export function ListNodes({ id, hide }: ListNodesProps) {
+export function ListNodes({ id }: ListNodesProps) {
     const [open, setOpen] = useState(false)
     const { selectedId, handleSelectedValue, getHashNode } =
         useTreeViewContext()
@@ -25,10 +24,6 @@ export function ListNodes({ id, hide }: ListNodesProps) {
             return
         }
         setOpen(!open)
-    }
-
-    if (hide) {
-        return null
     }
 
     return (

@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { TreeDomain } from '../../../domain/Tree/main'
 import { NodeType } from '../../../type/nodeType'
 import { FormattedComponentType } from '../../../domain/Tree/Service/IService'
-import { FilterType } from '../template/components/Filter'
+import { FilterType } from '../../../type/filterType'
 
 export function useTreeDomain(unitId: string) {
     const [treeDomain] = useState(new TreeDomain())
@@ -10,24 +10,23 @@ export function useTreeDomain(unitId: string) {
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
     const [rootNodes, setRootNodes] = useState<string[]>([])
+    const [filters, setFilters] = useState<FilterType[]>([])
     const [selectedNode, setSelectedNode] =
         useState<FormattedComponentType | null>(null)
-
-    const [filters, setFilters] = useState<FilterType[]>([])
 
     const fetchData = useCallback(
         async (id: string) => {
             try {
                 setIsLoading(true)
-
                 const response = await treeDomain.getItems(id)
+
                 if (!response.data) {
                     setIsError(true)
                     return
                 }
 
-                treeDomain.getRootNodes()
-                setRootNodes(treeDomain.rootNodes)
+                const rootNodes = treeDomain.getRootNodes()
+                setRootNodes(rootNodes)
                 setIsError(false)
             } finally {
                 setIsLoading(false)
@@ -37,14 +36,13 @@ export function useTreeDomain(unitId: string) {
     )
 
     useEffect(() => {
-        if (unitId) {
-            fetchData(unitId)
-        }
+        if (unitId) fetchData(unitId)
     }, [fetchData, unitId])
 
     function handleChangeUnitId(id: string) {
         fetchData(id)
         setSelectedNode(null)
+        setFilters([])
     }
 
     function handleNodeClick(id: string) {
@@ -56,6 +54,11 @@ export function useTreeDomain(unitId: string) {
         }
     }
 
+    function handleChangeFilter(filters: FilterType[]) {
+        setFilters(filters)
+        setRootNodes(treeDomain.applyFilter(filters))
+    }
+
     return {
         rootNodes,
         hash: treeDomain.hashNodes,
@@ -64,6 +67,7 @@ export function useTreeDomain(unitId: string) {
         isError,
         handleNodeClick,
         selectedNode,
+        handleChangeFilter,
         filters,
         setFilters,
     }

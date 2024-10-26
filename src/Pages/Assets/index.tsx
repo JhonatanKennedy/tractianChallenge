@@ -9,11 +9,13 @@ export function AssetsPage() {
     const {
         rootNodes,
         selectedNode,
-        handleChangeUnitId,
         hash,
-        handleNodeClick,
+        isLoading,
         filters,
         setFilters,
+        handleChangeUnitId,
+        handleNodeClick,
+        handleChangeFilter,
     } = useTreeDomain(selectedCompany.id)
 
     const [seachText, setSearchText] = useState('')
@@ -30,8 +32,10 @@ export function AssetsPage() {
             selectedCompany,
         },
         filterProps: {
-            onChangeFilter: setFilters,
+            onChangeFilter: handleChangeFilter,
             companyName: selectedCompany.name,
+            selectedFilters: filters,
+            setSelectedFilters: setFilters,
         },
         treeContentProps: {
             searchInputProps: {
@@ -42,6 +46,7 @@ export function AssetsPage() {
                 rootNodes,
                 hashNodes: hash,
                 onClickNode: handleNodeClick,
+                isLoading,
                 filters,
             },
         },

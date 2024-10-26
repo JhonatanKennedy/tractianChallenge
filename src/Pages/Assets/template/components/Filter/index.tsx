@@ -1,22 +1,21 @@
 import { HiOutlineExclamationCircle } from 'react-icons/hi'
 import { Button } from '../../../../../components/Button'
 import styles from './styles.module.scss'
-import { useState } from 'react'
-
-// eslint-disable-next-line react-refresh/only-export-components
-export enum FilterType {
-    ENERGY = 'energy',
-    CRITICAL = 'critical',
-}
+import { FilterType } from '../../../../../type/filterType'
 
 export type FilterProps = {
     onChangeFilter: (filter: FilterType[]) => void
     companyName: string
+    selectedFilters: FilterType[]
+    setSelectedFilters: (filters: FilterType[]) => void
 }
 
-export function Filter({ companyName, onChangeFilter }: FilterProps) {
-    const [selectedFilters, setSelectedFilters] = useState<FilterType[]>([])
-
+export function Filter({
+    companyName,
+    selectedFilters,
+    setSelectedFilters,
+    onChangeFilter,
+}: FilterProps) {
     function handleClickFilter(selectedFilter: FilterType) {
         const filters = [...selectedFilters]
         const existingFilterIndex = filters.findIndex(

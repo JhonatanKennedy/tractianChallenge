@@ -2,69 +2,33 @@ import styles from './styles.module.scss'
 import { NodeHashType } from '../../domain/Tree/Service/IService'
 import { ListNodes } from './components/ListNodes'
 import { TreeViewProvider } from './context'
-import { FilterType } from '../../Pages/Assets/template/components/Filter'
+import { FilterType } from '../../type/filterType'
 
 export type TreeViewProps = {
     rootNodes: string[]
     hashNodes: NodeHashType
-    filters: FilterType[]
     onClickNode: (id: string) => void
+    isLoading: boolean
+    filters: FilterType[]
 }
 
 export function TreeView({
     rootNodes,
     hashNodes,
-    onClickNode,
+    isLoading,
     filters,
+    onClickNode,
 }: TreeViewProps) {
-    const hasEnergy = filters.includes(FilterType.ENERGY)
-    const hasCritical = filters.includes(FilterType.CRITICAL)
-
-    if (hasCritical && hasEnergy) {
-        const filteredNodes = rootNodes.filter(
-            (id) => hashNodes[id].isCritical || hashNodes[id].isEnergy,
-        )
-
-        return (
-            <TreeViewProvider hash={hashNodes} onSelectNode={onClickNode}>
-                <div className={styles.container}>
-                    {filteredNodes.map((id) => (
-                        <ListNodes key={id} id={id} />
-                    ))}
-                </div>
-            </TreeViewProvider>
-        )
-    }
-
-    if (hasEnergy) {
-        const filteredNodes = rootNodes.filter((id) => hashNodes[id].isEnergy)
-        return (
-            <TreeViewProvider hash={hashNodes} onSelectNode={onClickNode}>
-                <div className={styles.container}>
-                    {filteredNodes.map((id) => (
-                        <ListNodes key={id} id={id} />
-                    ))}
-                </div>
-            </TreeViewProvider>
-        )
-    }
-
-    if (hasCritical) {
-        const filteredNodes = rootNodes.filter((id) => hashNodes[id].isCritical)
-
-        return (
-            <TreeViewProvider hash={hashNodes} onSelectNode={onClickNode}>
-                <div className={styles.container}>
-                    {filteredNodes.map((id) => (
-                        <ListNodes key={id} id={id} />
-                    ))}
-                </div>
-            </TreeViewProvider>
-        )
+    if (isLoading) {
+        return <div>loading</div>
     }
 
     return (
-        <TreeViewProvider hash={hashNodes} onSelectNode={onClickNode}>
+        <TreeViewProvider
+            hash={hashNodes}
+            onSelectNode={onClickNode}
+            filters={filters}
+        >
             <div className={styles.container}>
                 {rootNodes.map((id) => (
                     <ListNodes key={id} id={id} />
